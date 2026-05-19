@@ -15,8 +15,8 @@ The experiment results are shown in folder `experiment results`. For each event 
 
 To set up the tool, the following steps are required:
 
-1. Set up a virtual environment and install the requirements from the `requirements.txt`, e.g., using `pip install -r requirements.txt` in the current directory.
-2. Download a OCEL 2.0 log, e.g., from the [OCEL standard website](https://www.ocel-standard.org/event-logs/overview/), and place it in the `event_logs` directory.
+1. Set up a virtual Python environment and install the requirements from the `requirements.txt`, e.g., using `pip install -r requirements.txt` in the current directory.
+2. Download an OCEL 2.0 log, e.g., from the [OCEL standard website](https://www.ocel-standard.org/event-logs/overview/), and place it in the `event_logs` directory.
 3. Update the ``log_name`` in `src/resource_discovery.py`.
 4. (Optional): If you want to update the log with the discovered resources and roles, set the `` flag to true.
 5. Run the script using `python sry/resource_discovery.py`.
