@@ -9,24 +9,17 @@ from role_discovery import discover_roles_from_resources
 from ocel_cache import build_ocel_cache
 from write_transformed_log import add_is_resource_and_discovered_roles_and_export
 
-WRITE_TRANSFORMED_LOG = True
+LOG_NAME = "order-management.xml"
 
-log_names = [
-    "order-management_resource_discovered.xml",
-    "logistics.xml",
-    "hinge-production.xml",
-    "LRM-hiring.xml",
-    "LRM-hospital.xml",
-    "LRM-o2c.xml",
-    "LRM-p2p.xml",
-    "p2p.xml",
-]
+RESOURCE_DISCOVERY_THRESHOLD = 0.6
+
+WRITE_TRANSFORMED_LOG = False
 
 
 def run_resource_discovery():
     script_start_time = time.perf_counter()
 
-    input_file = Path(__file__).parent.parent / "event_logs" / log_names[1]
+    input_file = Path(__file__).parent.parent / "event_logs" / LOG_NAME
 
     ocel = pm4py.read_ocel2_xml(str(input_file))
     print(f"Loaded OCEL log: {input_file.name}")
@@ -68,10 +61,10 @@ def run_resource_discovery():
     print("\n\n=== Final Resource Score per Object Type with Individual Metrics ===")
     print(df_final_display.to_string(index=False))
 
-    # Extract resource types with final_resource_score > 0.6
-    high_score_resources = df_final[df_final["final_resource_score"] > 0.6]["object_type"].tolist()
+    # Extract resource types with final_resource_score > RESOURCE_DISCOVERY_THRESHOLD
+    high_score_resources = df_final[df_final["final_resource_score"] > RESOURCE_DISCOVERY_THRESHOLD]["object_type"].tolist()
 
-    print(f"\n=== High-Score Resource Types (score > 0.6) ===")
+    print(f"\n=== Discovered Resource Types (Threshold: {RESOURCE_DISCOVERY_THRESHOLD}) ===")
     print(f"Resources: {high_score_resources}")
 
     # Run role discovery for each resource type individually
