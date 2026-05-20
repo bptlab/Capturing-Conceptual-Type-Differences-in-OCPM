@@ -1,1 +1,1 @@
-Add your event logs to this directory.
+Add your event logs to this directory. The logs used for the evaluation can be found on the [OCEL standard website](https://www.ocel-standard.org/event-logs/overview/).
